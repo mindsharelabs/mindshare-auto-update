@@ -76,6 +76,10 @@ if(!class_exists('mindshare_license_check')) :
 		 */
 		function __construct($plugin_slug, $target_dir, $update_server_uri = NULL, $key = NULL, $email = NULL) {
 
+			$plugin_slug = apply_filters('msad_plugin_slug', $plugin_slug);
+			$target_dir = apply_filters('msad_target_dir', $target_dir);
+			$update_server_uri = apply_filters('msad_update_server_uri', $update_server_uri);
+
 			// set class public variables
 			if(isset($email)) {
 				$this->email = $email;
@@ -312,14 +316,14 @@ if(!class_exists('mindshare_license_check')) :
 			$tmp_dir = ABSPATH.'wp-content/upgrade/';
 			if(!is_dir($tmp_dir)) {
 				if(!mkdir($tmp_dir, 0755)) {
-					return "Plugin upgrade failed. Could not create the directory: ".$tmp_dir;
+					return new WP_Error('mkdir_failed', "Plugin upgrade failed. Could not create the directory: ".$tmp_dir);
 				}
 			}
 
 			// create the target folder
 			if(!is_dir($target_dir)) {
 				if(!mkdir($target_dir, 0755)) {
-					return "Plugin upgrade failed. Could not create the directory: ".$target_dir;
+					return new WP_Error('mkdir_failed', "Plugin upgrade failed. Could not create the directory: ".$target_dir);
 				}
 			}
 
@@ -341,10 +345,10 @@ if(!class_exists('mindshare_license_check')) :
 					if($debug !== TRUE) {
 						unlink($file);
 					}
-					return "An error occurred unzipping the file: ".$result->get_error_message();
+					return new WP_Error('unzip_failed', "An error occurred unzipping the file: ".$result->get_error_message());
 				}
 			} else {
-				return "The file (".$http_request_url.") was not found on the remote server, error code: ".$response_code;
+				return new WP_Error('curl_failed', "The file (".$http_request_url.") was not found on the remote server, error code: ".$response_code);
 			}
 		}
 	}

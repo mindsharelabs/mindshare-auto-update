@@ -5,7 +5,7 @@
  * Provides a simple way to add automatic updates to premium themes and plugins.
  * Interacts with our remote repository API: https://mindsharelabs.com/update/
  *
- * @version      0.5.1
+ * @version      0.5.2
  * @created      4/25/13 12:44 AM
  * @author       Mindshare Studios, Inc.
  * @copyright    Copyright (c) 2013
@@ -13,10 +13,10 @@
  *
  * @see          http://goo.gl/tUpSc (thanks to Abid Omar for the skeleton)
  *
- * @todo         change error output to use wp_die or WP_Error
  *
  * @changelog:
  *
+ *        0.5.2 - bug fix for SSL errors, added WP_Errors, added filters/hooks
  *        0.5.1 - bug fix for premium products not sending key / email to API server
  *        0.5 - split updater and license checker into separate classes to avoid issues with WPUS
  *        0.4.2 - bugfixes for update mechanism
@@ -48,14 +48,14 @@ if(!class_exists('mindshare_updater')) :
 		 *
 		 * @var
 		 */
-		public $class_version = '0.5.1';
+		public $class_version = '0.5.2';
 
 		/**
 		 * The plugin remote update API web service
 		 *
 		 * @var string
 		 */
-		public $update_server_uri = 'https://mindsharelabs.com/update/';
+		public $update_server_uri = 'http://mindsharelabs.com/update/';
 
 		/**
 		 * @var string
@@ -64,12 +64,12 @@ if(!class_exists('mindshare_updater')) :
 
 		/**
 		 *
-		 * The version number for this class (Mindshare Auto Update)
+		 * The name and version number for this class (Mindshare Auto Update)
 		 *
 		 * @return string
 		 */
 		public function __toString() {
-			return $this->class_version;
+			return get_class($this).' '.$this->class_version;
 		}
 	}
 endif;
