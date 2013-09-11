@@ -3,7 +3,7 @@
  * mindshare-license-check.php
  *
  * Provides a simple way to check licensing for premium themes and plugins.
- * Interacts with our remote repository API: https://mindsharelabs.com/update/
+ * Interacts with our remote repository API: http://mindsharelabs.com/update/
  *
  * @created      9/23/12 12:44 AM
  * @author       Mindshare Studios, Inc.

@@ -3,7 +3,7 @@
  * mindshare-auto-update.php
  *
  * Provides a simple way to add automatic updates to premium themes and plugins.
- * Interacts with our remote repository API: https://mindsharelabs.com/update/
+ * Interacts with our remote repository API: http://mindsharelabs.com/update/
  *
  * @created      4/25/13 12:44 AM
  * @author       Mindshare Studios, Inc.
